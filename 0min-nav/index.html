@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta	name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="author" content="Miguel Gea">
+  		<meta name="description" content="RevealJS-MINIMO-ONLINE  versión 1.0, marzo 2026">
+ 		<meta name="keywords" content="HTML, CSS, JavaScript, RevealJS">	
+		<title>reveal.js MIN+NAV</title>
+
+		<!--- Configuracion minima para funcionar en modo web sin recursos locales -->
+		<!---- Versión codepen: https://codepen.io/editor/mediaUX/pen/019d6443-a7df-7247-8497-5ad3db0f93c8 -->
+
+		<link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/white.css">
+
+	<style>
+		/* Coordenada de SLIDE */
+		#coords {
+				background: rgba(0,0,0,0.7); 
+    			color: #0f0; 
+    			padding: 10px; 
+    			font-family: monospace; 		
+				font-size: 14px;
+    			z-index: 99; 
+    			border-radius: 5px;
+    			pointer-events: auto;
+		}
+
+
+	#navbar {
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 98%;
+      background: rgba(0,0,0,0.4);
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 2; /* MUY importante */
+      }
+
+      #navbar button {
+            padding: 10px 15px;
+            background: #111;
+            color: #0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            }
+
+            #navbar button:hover {
+            background: #333;
+            }
+	</style>
+
+
+
+	</head>
+
+
+	<body class="reveal-viewport theme-font-montserrat theme-color-white-blue">	
+		
+	<div class="reveal">
+        <div class="slides">
+
+        <!---- Slide 0 ---->	
+		<section> Slides 0 
+        <audio id="audio" src="https://cdn.pixabay.com/download/audio/2025/11/04/audio_f12d1bd523.mp3"></audio>
+			<p> Presentación RevealJS mínima  </p>
+        	<p>  + incluye barra de navegación </p>
+        	<p>  + control de audio </p>
+        
+		</section>
+
+      	<!---- Slides 1 ---->
+		<section>				
+			<section>Slide 1.0</section>
+			<section>Slide 1.1</section>
+          <section>Slide 1.2</section>		
+      </section>
+
+      <!---- Slide 2 ----> 
+      <section >
+			<section>Slide 2.0</section>
+        	<section>Slide 2.1</section>
+      </section>
+	     </div>
+    </div>
+
+
+    <div id="navbar">
+            <button onclick="Reveal.slide(0,0)">INICIO</button>
+            <button onclick="Reveal.prev()">Atrás</button>
+            <button onclick="Reveal.next()">Siguiente</button>
+            <button id="btn" onclick="toggleAudio()">▶ PLAY</button>
+            <div id="coords">0,0</div>
+	</div>
+   
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+
+    <script>
+        // 1. Inicializar Reveal
+        Reveal.initialize({
+            hash: true,
+            transition: 'fade',
+            controls: true,
+            progress: true
+        });
+
+        // 2. Actualizar coordenadas
+        Reveal.on('slidechanged', event => {
+            const h = event.indexh;
+            const v = event.indexv;
+            document.getElementById("coords").textContent = `${h},${v}`;
+        });
+
+        // 3. Lógica de Audio corregida
+		const audio = document.getElementById("audio");
+		const btn = document.getElementById("btn");
+
+		function toggleAudio() {
+		if (audio.paused) {
+			audio.play();
+			btn.textContent = "⏸";
+		} else {
+			audio.pause();
+			btn.textContent = "▶";
+		}
+		}
+    </script>
+</body>
+</html>
